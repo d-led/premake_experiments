@@ -11,18 +11,10 @@ endif
 .PHONY: clean prebuild prelink
 
 ifeq ($(config),debug)
-  ifeq ($(origin CC), default)
-    CC = clang
-  endif
-  ifeq ($(origin CXX), default)
-    CXX = clang++
-  endif
-  ifeq ($(origin AR), default)
-    AR = ar
-  endif
-  TARGETDIR = ../../../bin/macosx/test/Debug
+  RESCOMP = windres
+  TARGETDIR = ../../../bin/linux/test/Debug
   TARGET = $(TARGETDIR)/test
-  OBJDIR = ../../../obj/macosx/test/Debug
+  OBJDIR = ../../../obj/linux/test/Debug
   DEFINES +=
   INCLUDES +=
   FORCE_INCLUDE +=
@@ -32,7 +24,7 @@ ifeq ($(config),debug)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   LIBS +=
   LDDEPS +=
-  ALL_LDFLAGS += $(LDFLAGS) -m64 -std=c++11
+  ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64 -std=c++11
   LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
@@ -40,7 +32,7 @@ ifeq ($(config),debug)
   endef
   define POSTBUILDCMDS
 	@echo Copying the resource file to the target dir
-	cp -rf ../../../res/macosx/data.txt ../../../bin/macosx/test/Debug
+	cp -rf ../../../res/linux/data.txt ../../../bin/linux/test/Debug
 	$(TARGET)
   endef
 all: prebuild prelink $(TARGET)
@@ -49,18 +41,10 @@ all: prebuild prelink $(TARGET)
 endif
 
 ifeq ($(config),release)
-  ifeq ($(origin CC), default)
-    CC = clang
-  endif
-  ifeq ($(origin CXX), default)
-    CXX = clang++
-  endif
-  ifeq ($(origin AR), default)
-    AR = ar
-  endif
-  TARGETDIR = ../../../bin/macosx/test/Release
+  RESCOMP = windres
+  TARGETDIR = ../../../bin/linux/test/Release
   TARGET = $(TARGETDIR)/test
-  OBJDIR = ../../../obj/macosx/test/Release
+  OBJDIR = ../../../obj/linux/test/Release
   DEFINES +=
   INCLUDES +=
   FORCE_INCLUDE +=
@@ -70,7 +54,7 @@ ifeq ($(config),release)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   LIBS +=
   LDDEPS +=
-  ALL_LDFLAGS += $(LDFLAGS) -m64 -std=c++11
+  ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64 -std=c++11
   LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
@@ -78,7 +62,7 @@ ifeq ($(config),release)
   endef
   define POSTBUILDCMDS
 	@echo Copying the resource file to the target dir
-	cp -rf ../../../res/macosx/data.txt ../../../bin/macosx/test/Release
+	cp -rf ../../../res/linux/data.txt ../../../bin/linux/test/Release
 	$(TARGET)
   endef
 all: prebuild prelink $(TARGET)

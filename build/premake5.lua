@@ -38,8 +38,8 @@ workspace "example"
         optimize "On"
 
     filter "action:gmake"
-        linkoptions  { "-std=c++14" }
-        buildoptions { "-std=c++14" } --, "-stdlib=libc++"
+        linkoptions  { "-std=c++11" }
+        buildoptions { "-std=c++11" } --, "-stdlib=libc++"
     
     filter {}
 

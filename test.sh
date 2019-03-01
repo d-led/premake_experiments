@@ -8,11 +8,21 @@ echo "origin is ${origin}"
 
 cd build
 
-./premake5.osx gmake
+if [ $(uname) == "Darwin" ]; then
+  os="macosx"
+else
+    if [ $(uname) == "Linux" ]; then
+        os="linux"
+    fi
+fi
+
+echo "os is: ${os}"
+
+./premake/${os}/premake5 gmake
 
 cd $origin
 
 echo "now in $(pwd)"
 
-make -C build/macosx/gmake config=debug clean
-make -C build/macosx/gmake config=debug
+make -C build/${os}/gmake config=debug clean
+make -C build/${os}/gmake config=debug

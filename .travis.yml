@@ -1,0 +1,12 @@
+dist: xenial
+
+language: cpp
+
+compiler:
+  - gcc
+
+cache:
+ - apt
+
+script:
+  - ./test

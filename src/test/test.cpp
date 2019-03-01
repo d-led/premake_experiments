@@ -17,7 +17,7 @@ std::string in_dir_of(std::string const& filename, std::string const& other_file
     const auto sep = "/";
     const auto last_slash = filename.rfind(sep);
     if (last_slash==std::string::npos) {
-        return ".";
+        return other_filenme;
     } else {
         return filename.substr(0, last_slash) + sep + other_filenme;
     }
