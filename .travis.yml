@@ -9,4 +9,4 @@ cache:
  - apt
 
 script:
-  - ./test
+  - ./test.sh
