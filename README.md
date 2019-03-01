@@ -6,6 +6,7 @@
 
 - post-build action sequence
 - cross-platform copying of resource files
+- generic test scripts
 
 ```txt
 $ ./test.sh

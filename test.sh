@@ -8,13 +8,20 @@ echo "origin is ${origin}"
 
 cd build
 
-if [ $(uname) == "Darwin" ]; then
-  os="macosx"
-else
-    if [ $(uname) == "Linux" ]; then
-        os="linux"
-    fi
-fi
+case "$(uname)" in
+  Darwin)
+    os="macosx"
+  ;;
+
+  Linux)
+    os="linux"
+  ;;
+
+  *)
+    echo $"unknown OS. Stopping"
+    exit 1
+ 
+esac
 
 echo "os is: ${os}"
 
